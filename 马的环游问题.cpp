@@ -1,5 +1,6 @@
 #include<list>
 #include<cstdio>
+#include<iostream>
 using namespace std;
 void move_3up_1right(int&id, bool &visited) {
 	id -= 15;
@@ -46,10 +47,17 @@ bool check__1up_3left(int id, bool visited) {
 	return (!visited) && (id - 10 > 0);
 }
 bool check_1down_3right(int id, bool visited) {
+<<<<<<< HEAD
 	return (!visited) && (id + 10 < 65);
 }
 bool check_1down_3left(int id, bool visited) {
 	return (!visited) && id + 6 < 65;
+=======
+	return (!visited)&&(id + 10 < 65);
+}
+bool check_1down_3left(int id, bool visited) {
+	return (!visited)&&id + 6 < 65;
+>>>>>>> origin/master
 }
 bool check_3down_1right(int id, bool visited) {
 	return (!visited) && id + 17 < 65;
@@ -89,12 +97,102 @@ void print(list<node>blocks) {
 	printf("\n");
 }
 void horse(int n, node*block, int step, list<node>blocks) {
+<<<<<<< HEAD
 	if (step > 63) {
+=======
+	bool visit = block[n].visited;
+	block[n].visited = true;
+	if (!visit)
+ 	    blocks.push_back(block[n]);
+	if (step == 63) {
+>>>>>>> origin/master
 		print(blocks);
 		break;
 	}
+<<<<<<< HEAD
 	block[n].visited = true;
 	blocks.
+=======
+	int temp = n;
+	if (check_1down_3left(n, block[n].down1_left3)) {
+		move_1down_3left(n,block[n].down1_left3);
+		if (!block[temp].visited) {
+		move_1down_3left(n, block[n].down1_left3);
+		horse(n, block, step + 1, blocks);
+	    } else {
+	    	horse(n, block, step, blocks);
+	    }
+	}
+	else if (check_1down_3right(n,block[n].down1_right3)) {
+		move_1down_3right(temp, block[n].down1_right3);
+		if (!block[temp].visited) {
+		move_1down_3right(n, block[n].down1_right3);
+		horse(n, block, step + 1, blocks);
+	    } else {
+	    	horse(n, block, step, blocks);
+	    }
+	}
+	else if (check_1up_3right(n, block[n].up1_right3)) {
+		move_1up_3right(temp, block[n].up1_right3);
+		if (!block[temp].visited) {
+		move_1up_3right(n, block[n].up1_right3);
+		horse(n, block, step + 1, blocks);
+	    } else {
+	    	horse(n, block, step, blocks);
+	    }
+	}
+	else if (check__1up_3left(n, block[n].up1_left3)) {
+		move__1up_3left(temp, block[n].up1_left3);
+		if (!block[temp].visited) {
+		move__1up_3left(n, block[n].up1_left3);
+		horse(n, block, step + 1, blocks);
+	    } else {
+	    	horse(n, block, step, blocks);
+	    }
+	}
+	else if (check_3down_1left(n, block[n].down3_left1)) {
+		move_3down_1left(temp, block[n].down3_left1);
+		if (!block[temp].visited) {
+		move_3down_1left(n, block[n].down3_left1);
+		horse(n, block, step + 1, blocks);
+	    } else {
+	    	horse(n, block, step, blocks);
+	    }
+	}
+	else if (check_3down_1right(n, block[n].down3_right1)) {
+		move_3down_1right(temp, block[n].down3_right1);
+		if (!block[temp].visited) {
+		move_3down_1right(n, block[n].down3_right1);
+		horse(n, block, step + 1, blocks);
+	    } else {
+	    	horse(n, block, step, blocks);
+	    }
+	}
+	else if (check_3up_1left(n, block[n].up3_left1)) {
+		move_3up_1left(temp, block[n].down3_left1);
+		if (!block[temp].visited) {
+		move_3up_1left(n, block[n].up3_left1);
+		horse(n, block, step + 1, blocks);
+	    } else {
+	    	horse(n, block, step, blocks);
+	    }
+	}
+	else if (check_3up_1right(n, block[n].up3_right1)) {
+		move_3up_1right(temp, block[n].up3_right1);
+		if  (!block[temp].visited) {
+		move_3up_1right(n, block[n].up3_right1);
+		horse(n, block, step + 1, blocks);
+	    } else {
+	    	horse(n, block, step, blocks);
+	    }
+	}
+	else {
+		clear(block[n]);
+		blocks.pop_back();
+		horse(blocks.back().number, block, step - 1, blocks);
+	}
+	return;
+>>>>>>> origin/master
 }
 int main() {
 	int n = 1;
@@ -104,7 +202,7 @@ int main() {
 		block[i].number = i;
 	}
 	while (n != -1) {
-		scanf_s("%d", &n);
+		cin >> n;
 		if (n == -1)
 			break;
 		list<node>blocks;
